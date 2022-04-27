@@ -1,0 +1,20 @@
+container {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+camera {
+    flex-grow: 1;
+    align-self: stretch;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+button {
+    margin: 25px;
+}
+
+text {
+    margin: 25px;
+}

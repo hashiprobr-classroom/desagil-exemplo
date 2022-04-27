@@ -1,0 +1,13 @@
+container {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+indicator {
+    margin: 25px;
+}
+
+text {
+    margin: 25px;
+}

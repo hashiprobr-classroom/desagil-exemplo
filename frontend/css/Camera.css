@@ -1,0 +1,22 @@
+container {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+preview {
+    flex-grow: 1;
+    align-self: stretch;
+    justify-content: flex-end;
+}
+
+buttons {
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 25px;
+}
+
+image {
+    align-self: stretch;
+    margin: 25px;
+}
