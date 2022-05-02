@@ -1,3 +1,20 @@
 container {
     flex-grow: 1;
 }
+
+fab {
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+}
+
+scroll {
+    height: 0; /* Gambiarra para funcionar no Chrome. */
+    flex-grow: 1;
+}
+
+item {
+    height: 50px;
+    margin: 10px;
+    background-color: #00ff00;
+}
