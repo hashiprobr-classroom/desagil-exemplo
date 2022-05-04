@@ -4,15 +4,12 @@ container {
     align-items: center;
 }
 
-camera {
+preview {
     flex-grow: 1;
     align-self: stretch;
     justify-content: flex-end;
     align-items: center;
-}
-
-button {
-    margin: 25px;
+    padding: 25px;
 }
 
 text {

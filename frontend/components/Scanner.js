@@ -9,9 +9,9 @@ import useScanner from '@hashiprobr/expo-use-scanner';
 import styles from '../styles/Scanner.json';
 
 export default function Scanner(props) {
-    const [data, setData] = useState(null);
+    const [data, setData] = useState();
 
-    const [scanner, Camera] = useScanner();
+    const [scanner, Preview] = useScanner();
 
     async function onPressScan() {
         try {
@@ -33,9 +33,9 @@ export default function Scanner(props) {
     return (
         <SafeAreaView style={styles.container}>
             {scanner.active ? (
-                <Camera style={styles.camera} onBarCodeScanned={onBarCodeScanned}>
-                    <Button style={styles.button} mode="contained" onPress={onPressCancel}>Cancel</Button>
-                </Camera>
+                <Preview style={styles.preview} onBarCodeScanned={onBarCodeScanned}>
+                    <Button mode="contained" onPress={onPressCancel}>Cancel</Button>
+                </Preview>
             ) : (
                 <>
                     {data && (

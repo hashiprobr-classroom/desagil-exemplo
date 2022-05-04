@@ -10,16 +10,18 @@ public class Cat {
 	private String name;
 	private String breed;
 	private Eye eye;
+	private String photo;
 	private long birth;
 
 	public Cat() {
 	}
 
-	public Cat(String name, String breed, Eye eye, LocalDate birth) {
+	public Cat(String name, String breed, Eye eye, String photo, LocalDate birth) {
 		this.key = null;
 		this.name = name;
 		this.breed = breed;
 		this.eye = eye;
+		this.photo = photo;
 		this.birth = birth.toEpochDay();
 	}
 
@@ -53,6 +55,14 @@ public class Cat {
 
 	public void setEye(Eye eye) {
 		this.eye = eye;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 	public long getBirth() {

@@ -7,12 +7,9 @@ container {
 preview {
     flex-grow: 1;
     align-self: stretch;
-    justify-content: flex-end;
-}
-
-buttons {
     flex-direction: row;
     justify-content: space-around;
+    align-items: flex-end;
     padding: 25px;
 }
 

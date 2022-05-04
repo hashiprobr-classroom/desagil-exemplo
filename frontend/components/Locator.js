@@ -9,11 +9,11 @@ import useLocator from '@hashiprobr/expo-use-locator';
 import styles from '../styles/Locator.json';
 
 export default function Locator(props) {
-    const [coords, setCoords] = useState(null);
+    const [coords, setCoords] = useState();
 
     const locator = useLocator();
 
-    async function onPress() {
+    async function onPressRead() {
         let location;
         try {
             location = await locator.read();
@@ -26,13 +26,13 @@ export default function Locator(props) {
     return (
         <SafeAreaView style={styles.container}>
             {locator.reading ? (
-                <ActivityIndicator style={styles.indicator} />
+                <ActivityIndicator style={styles.content} />
             ) : (
                 coords && (
-                    <Text style={styles.text}>{coords.latitude}, {coords.longitude}</Text>
+                    <Text style={styles.content}>{coords.latitude}, {coords.longitude}</Text>
                 )
             )}
-            <Button onPress={onPress}>Read</Button>
+            <Button onPress={onPressRead}>Read</Button>
         </SafeAreaView>
     );
 }

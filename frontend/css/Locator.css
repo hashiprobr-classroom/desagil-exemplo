@@ -4,10 +4,6 @@ container {
     align-items: center;
 }
 
-indicator {
-    margin: 25px;
-}
-
-text {
+content {
     margin: 25px;
 }

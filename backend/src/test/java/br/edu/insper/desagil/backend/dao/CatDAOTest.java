@@ -37,7 +37,7 @@ class CatDAOTest {
 		Selection selection = dao.select();
 		dao.delete(selection);
 
-		Cat cat = new Cat("Nino", "Sialata", Eye.BLUE, LocalDate.of(2020, Month.OCTOBER, 5));
+		Cat cat = new Cat("Nino", "Sialata", Eye.BLUE, "http://www.nino.com/foto.png", LocalDate.of(2020, Month.OCTOBER, 5));
 		key = dao.create(cat);
 	}
 
@@ -51,6 +51,7 @@ class CatDAOTest {
 		assertEquals("Nino", cat.getName());
 		assertEquals("Sialata", cat.getBreed());
 		assertEquals(Eye.BLUE, cat.getEye());
+		assertEquals("http://www.nino.com/foto.png", cat.getPhoto());
 
 		LocalDate birth = LocalDate.ofEpochDay(cat.getBirth());
 		assertEquals(2020, birth.getYear());
@@ -62,7 +63,7 @@ class CatDAOTest {
 	void update() {
 		Cat cat;
 
-		cat = new Cat("Pepe", "Laranja", Eye.GREEN, LocalDate.of(2021, Month.AUGUST, 4));
+		cat = new Cat("Pepe", "Laranja", Eye.GREEN, "http://www.pepe.com/foto.png", LocalDate.of(2021, Month.AUGUST, 4));
 		cat.setKey(key);
 		dao.update(cat);
 
@@ -73,6 +74,7 @@ class CatDAOTest {
 		assertEquals("Pepe", cat.getName());
 		assertEquals("Laranja", cat.getBreed());
 		assertEquals(Eye.GREEN, cat.getEye());
+		assertEquals("http://www.pepe.com/foto.png", cat.getPhoto());
 
 		LocalDate birth = LocalDate.ofEpochDay(cat.getBirth());
 		assertEquals(2021, birth.getYear());

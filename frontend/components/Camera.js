@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-import { View } from 'react-native';
-
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button } from 'react-native-paper';
@@ -45,10 +43,8 @@ export default function Camera(props) {
         <SafeAreaView style={styles.container}>
             {camera.active ? (
                 <Preview style={styles.preview}>
-                    <View style={styles.buttons}>
-                        <Button mode="contained" onPress={onPressTake}>Take</Button>
-                        <Button mode="contained" onPress={onPressClose}>Close</Button>
-                    </View>
+                    <Button mode="contained" onPress={onPressTake}>Take</Button>
+                    <Button mode="contained" onPress={onPressClose}>Close</Button>
                 </Preview>
             ) : (
                 <>

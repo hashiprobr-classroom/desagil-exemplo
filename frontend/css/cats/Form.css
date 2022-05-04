@@ -1,8 +1,27 @@
 container {
     flex-grow: 1;
-    padding: 10px;
+    padding: 0 10px 10px 10px;
+}
+
+photo {
+    align-self: center;
+    width: 250px;
+    height: 250px;
+    margin-top: 10px;
+}
+
+image {
+    flex-grow: 1;
 }
 
 input {
-    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+error {
+    margin-top: 5px;
+}
+
+button {
+    margin-top: 20px;
 }
