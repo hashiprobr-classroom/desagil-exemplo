@@ -22,7 +22,7 @@
     "@hashiprobr/expo-use-camera": "~1.0.9",
     "@hashiprobr/expo-use-locator": "~1.0.5",
     "@hashiprobr/expo-use-picker": "~1.0.3",
-    "@hashiprobr/expo-use-rest": "~1.0.5",
+    "@hashiprobr/expo-use-rest": "~2.0.0",
     "@hashiprobr/expo-use-scanner": "~1.0.10",
     "@hashiprobr/react-create-state-context": "~1.0.5",
     "@hashiprobr/react-native-aspect-image": "~1.0.12",

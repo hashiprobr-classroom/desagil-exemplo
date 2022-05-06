@@ -3,6 +3,7 @@ package br.edu.insper.desagil.backend.core;
 import java.time.LocalDate;
 
 import br.pro.hashi.nfp.dao.Autokey;
+import br.pro.hashi.nfp.dao.File;
 
 public class Cat {
 	@Autokey
@@ -10,6 +11,7 @@ public class Cat {
 	private String name;
 	private String breed;
 	private Eye eye;
+	@File
 	private String photo;
 	private long birth;
 

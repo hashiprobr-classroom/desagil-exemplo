@@ -2,6 +2,7 @@ package br.edu.insper.desagil.backend.endpoint;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import br.edu.insper.desagil.backend.core.Cat;
 import br.edu.insper.desagil.backend.dao.CatDAO;
@@ -30,10 +31,8 @@ public class CatEndpoint extends Endpoint<Cat> {
 	}
 
 	@Override
-	public String getFile(Args args) {
-		String key = args.get("key");
-		String name = args.get("name");
-		return dao.retrieve(key, name);
+	public Object post(Args args, Cat cat, Map<String, InputStream> streams) {
+		return dao.create(cat, streams);
 	}
 
 	@Override
@@ -42,44 +41,22 @@ public class CatEndpoint extends Endpoint<Cat> {
 	}
 
 	@Override
-	public Object postFile(Args args, InputStream stream) {
-		String key = args.get("key");
-		String name = args.get("name");
-		return dao.create(key, name, stream);
-	}
-
-	@Override
 	public Object put(Args args, Cat cat) {
 		dao.update(cat);
-		return true;
-	}
-
-	@Override
-	public Object putFile(Args args, InputStream stream) {
-		String key = args.get("key");
-		String name = args.get("name");
-		return dao.update(key, name, stream);
+		return null;
 	}
 
 	@Override
 	public Object delete(Args args) {
 		String key = args.get("key");
 		dao.delete(key);
-		return true;
+		return null;
 	}
 
 	@Override
 	public Object deleteList(Args args) {
 		Selection selection = dao.select();
 		dao.delete(selection);
-		return true;
-	}
-
-	@Override
-	public Object deleteFile(Args args) {
-		String key = args.get("key");
-		String name = args.get("name");
-		dao.delete(key, name);
-		return true;
+		return null;
 	}
 }

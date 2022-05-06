@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Image } from 'react-native';
+import { Image, ScrollView } from 'react-native';
 
-import { Text, Button, TextInput, HelperText, Snackbar, Dialog, ActivityIndicator, TouchableRipple } from 'react-native-paper';
+import { Text, Button, TextInput, HelperText, Snackbar, Portal, Dialog, ActivityIndicator, TouchableRipple } from 'react-native-paper';
 
 import RoundedView from '@hashiprobr/react-native-rounded-view';
 import Icon from '@hashiprobr/react-native-paper-icon';
@@ -155,56 +155,60 @@ export default function Form(props) {
     return (
         <>
             <SafeAreaView style={styles.container}>
-                <TouchableRipple style={styles.photo} onPress={onPressPhoto}>
-                    {picker.loading ? (
-                        <ActivityIndicator style={styles.image} size="large" />
-                    ) : (
-                        photo === null ? (
-                            <Icon name="cat" />
+                <ScrollView style={styles.scroll}>
+                    <TouchableRipple style={styles.photo} onPress={onPressPhoto}>
+                        {picker.loading ? (
+                            <ActivityIndicator style={styles.image} size="large" />
                         ) : (
-                            <RoundedView style={styles.image}>
-                                <Image style={styles.image} source={{ uri: photo }} />
-                            </RoundedView>
-                        )
+                            photo === null ? (
+                                <Icon name="cat" />
+                            ) : (
+                                <RoundedView style={styles.image}>
+                                    <Image style={styles.image} source={{ uri: photo }} />
+                                </RoundedView>
+                            )
+                        )}
+                    </TouchableRipple>
+
+                    <TextInput style={styles.input} label="Name" value={name} onChangeText={onChangeName} error={nameError} />
+                    {nameError && (
+                        <HelperText style={styles.error} type="error">Name cannot be blank</HelperText>
                     )}
-                </TouchableRipple>
 
-                <TextInput style={styles.input} label="Name" value={name} onChangeText={onChangeName} error={nameError} />
-                {nameError && (
-                    <HelperText style={styles.error} type="error">Name cannot be blank</HelperText>
-                )}
+                    <TextInput style={styles.input} label="Breed" value={breed} onChangeText={onChangeBreed} error={breedError} />
+                    {breedError && (
+                        <HelperText style={styles.error} type="error">Breed cannot be blank</HelperText>
+                    )}
 
-                <TextInput style={styles.input} label="Breed" value={breed} onChangeText={onChangeBreed} error={breedError} />
-                {breedError && (
-                    <HelperText style={styles.error} type="error">Breed cannot be blank</HelperText>
-                )}
+                    <DropDown style={styles.input} list={list} label="Eye" value={eye} onChangeValue={onChangeEye} />
 
-                <DropDown style={styles.input} list={list} label="Eye" value={eye} onChangeValue={onChangeEye} />
+                    <DateTimePicker style={styles.input} type="date" label="Birth" value={birth} onChangeDate={onChangeBirth} />
 
-                <DateTimePicker style={styles.input} type="date" label="Birth" value={birth} onChangeDate={onChangeBirth} />
-
-                <Button style={styles.button} mode="outlined" onPress={params ? onPressUpdate : onPressCreate} disabled={nameError || breedError || client.running} loading={client.running}>{params ? 'Update' : 'Create'}</Button>
-                {params && (
-                    <>
-                        <Button style={styles.button} mode="outlined" onPress={onPressDelete} disabled={client.running}>Delete</Button>
-                        <Dialog visible={confirming} onDismiss={onDismissDelete}>
-                            <Dialog.Title>
-                                Delete {params.cat.name}?
-                            </Dialog.Title>
-                            <Dialog.Content>
-                                {client.running ? (
-                                    <ActivityIndicator />
-                                ) : (
-                                    <Text>This operation cannot be undone.</Text>
-                                )}
-                            </Dialog.Content>
-                            <Dialog.Actions>
-                                <Button onPress={onDismissDelete} disabled={client.running}>Cancel</Button>
-                                <Button onPress={onConfirmDelete} disabled={client.running}>Ok</Button>
-                            </Dialog.Actions>
-                        </Dialog>
-                    </>
-                )}
+                    <Button style={styles.button} mode="outlined" onPress={params ? onPressUpdate : onPressCreate} disabled={nameError || breedError || client.running} loading={client.running}>{params ? 'Update' : 'Create'}</Button>
+                    {params && (
+                        <>
+                            <Button style={styles.button} mode="outlined" onPress={onPressDelete} disabled={client.running}>Delete</Button>
+                            <Portal>
+                                <Dialog visible={confirming} onDismiss={onDismissDelete}>
+                                    <Dialog.Title>
+                                        Delete {params.cat.name}?
+                                    </Dialog.Title>
+                                    <Dialog.Content>
+                                        {client.running ? (
+                                            <ActivityIndicator />
+                                        ) : (
+                                            <Text>This operation cannot be undone.</Text>
+                                        )}
+                                    </Dialog.Content>
+                                    <Dialog.Actions>
+                                        <Button onPress={onDismissDelete} disabled={client.running}>Cancel</Button>
+                                        <Button onPress={onConfirmDelete} disabled={client.running}>Ok</Button>
+                                    </Dialog.Actions>
+                                </Dialog>
+                            </Portal>
+                        </>
+                    )}
+                </ScrollView>
             </SafeAreaView>
 
             <Snackbar visible={clientError} onDismiss={() => { }} action={{ label: 'Close', onPress: () => setClientError(false) }}>

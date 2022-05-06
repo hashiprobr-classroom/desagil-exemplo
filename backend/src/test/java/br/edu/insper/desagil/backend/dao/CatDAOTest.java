@@ -1,8 +1,8 @@
 package br.edu.insper.desagil.backend.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -43,8 +43,8 @@ class CatDAOTest {
 
 	@Test
 	void retrieve() {
-		assertTrue(dao.exists(key));
 		Cat cat = dao.retrieve(key);
+		assertNotNull(cat);
 
 		assertEquals(key, cat.getKey());
 
@@ -85,7 +85,7 @@ class CatDAOTest {
 	@Test
 	void delete() {
 		dao.delete(key);
-		assertFalse(dao.exists(key));
+		assertNull(dao.retrieve(key));
 	}
 
 	@AfterAll

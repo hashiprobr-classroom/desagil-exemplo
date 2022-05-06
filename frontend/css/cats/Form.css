@@ -1,5 +1,11 @@
 container {
     flex-grow: 1;
+}
+
+scroll {
+    flex-grow: 1;
+    align-self: stretch;
+    height: 0; /* Gambiarra para funcionar na web. */
     padding: 0 10px 10px 10px;
 }
 
