@@ -1,14 +1,13 @@
 package br.edu.insper.desagil.backend.endpoint;
 
-import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
 
 import br.edu.insper.desagil.backend.core.Cat;
 import br.edu.insper.desagil.backend.dao.CatDAO;
 import br.pro.hashi.nfp.dao.Selection;
 import br.pro.hashi.nfp.rest.server.Args;
 import br.pro.hashi.nfp.rest.server.Endpoint;
+import br.pro.hashi.nfp.rest.server.Files;
 
 public class CatEndpoint extends Endpoint<Cat> {
 	private CatDAO dao;
@@ -31,8 +30,8 @@ public class CatEndpoint extends Endpoint<Cat> {
 	}
 
 	@Override
-	public Object post(Args args, Cat cat, Map<String, InputStream> streams) {
-		return dao.create(cat, streams);
+	public Object post(Args args, Cat cat, Files files) {
+		return dao.create(cat, files);
 	}
 
 	@Override
