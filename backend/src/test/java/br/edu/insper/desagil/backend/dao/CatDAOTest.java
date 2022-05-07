@@ -33,7 +33,7 @@ class CatDAOTest {
 
 	@BeforeEach
 	void setUp() {
-		dao = new CatDAO().using("test");
+		dao = new CatDAO();
 		Selection selection = dao.select();
 		dao.delete(selection);
 
