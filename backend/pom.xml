@@ -12,7 +12,7 @@
     <dependency>
       <groupId>io.github.hashiprobr</groupId>
       <artifactId>nfp-dao</artifactId>
-      <version>3.0.1</version>
+      <version>3.1.1</version>
     </dependency>
     <dependency>
       <groupId>io.github.hashiprobr</groupId>

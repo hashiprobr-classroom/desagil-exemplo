@@ -25,37 +25,45 @@ public class CatEndpoint extends Endpoint<Cat> {
 
 	@Override
 	public List<Cat> getList(Args args) {
-		Selection selection = dao.select();
+		Selection selection = dao.select().orderBy("name");
 		return dao.retrieve(selection);
 	}
 
 	@Override
 	public Object post(Args args, Cat cat, Files files) {
-		return dao.create(cat, files);
+		dao.create(cat, files);
+		return cat;
 	}
 
 	@Override
 	public Object post(Args args, Cat cat) {
-		return dao.create(cat);
+		dao.create(cat);
+		return cat;
+	}
+
+	@Override
+	public Object put(Args args, Cat cat, Files files) {
+		dao.update(cat, files);
+		return cat;
 	}
 
 	@Override
 	public Object put(Args args, Cat cat) {
 		dao.update(cat);
-		return null;
+		return cat;
 	}
 
 	@Override
 	public Object delete(Args args) {
 		String key = args.get("key");
 		dao.delete(key);
-		return null;
+		return "";
 	}
 
 	@Override
 	public Object deleteList(Args args) {
 		Selection selection = dao.select();
 		dao.delete(selection);
-		return null;
+		return "";
 	}
 }

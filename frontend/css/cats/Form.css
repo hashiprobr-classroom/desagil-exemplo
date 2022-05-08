@@ -2,10 +2,12 @@ container {
     flex-grow: 1;
 }
 
-scroll {
+outerScroll {
     flex-grow: 1;
-    align-self: stretch;
     height: 0; /* Gambiarra para funcionar na web. */
+}
+
+innerScroll {
     padding: 0 10px 10px 10px;
 }
 

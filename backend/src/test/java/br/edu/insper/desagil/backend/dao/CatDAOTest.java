@@ -38,7 +38,8 @@ class CatDAOTest {
 		dao.delete(selection);
 
 		Cat cat = new Cat("Nino", "Sialata", Eye.BLUE, "http://www.nino.com/foto.png", LocalDate.of(2020, Month.OCTOBER, 5));
-		key = dao.create(cat);
+		dao.create(cat);
+		key = cat.getKey();
 	}
 
 	@Test

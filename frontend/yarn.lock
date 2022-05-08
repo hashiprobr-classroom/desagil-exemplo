@@ -1504,20 +1504,15 @@
   resolved "https://registry.yarnpkg.com/@hashiprobr/expo-use-locator/-/expo-use-locator-1.0.5.tgz#8a87cd27fb3e93fa4ef4c9bed3cd3ad4df336f7d"
   integrity sha512-k/xXVsYMIYICo0yQFhwTg3oSiKJPqabfwuFGu/c0+n8LtRLsD4RfIGYTxiupearTbD/+VhMFa3geXvoX+BEcYQ==
 
-"@hashiprobr/expo-use-picker@~1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@hashiprobr/expo-use-picker/-/expo-use-picker-1.0.3.tgz#0dd6bac5e457dbbc577ce8aa9ad598a56e491314"
-  integrity sha512-oE1D67fMI53kPTSx+V8yZZ1xC8GtRXwbNiy+9czYlJrTiXPPdszzjXILwxALp2ZVSYC3/1gO1WiXKRRQY8EdTQ==
+"@hashiprobr/expo-use-picker@~1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@hashiprobr/expo-use-picker/-/expo-use-picker-1.0.4.tgz#f6671afb763e300a1f636101bec72026e378b195"
+  integrity sha512-HcAv+ZowGcjuudmWBT1lJz9H7gEjxrl0PckF2Xihv+ELO6hBbQ7S3tSRuuoQ8xE6Zq8Lrj+shCStF8JI5pwiGA==
 
-"@hashiprobr/expo-use-rest@~2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@hashiprobr/expo-use-rest/-/expo-use-rest-2.0.0.tgz#ae57b9176cfdf722cff84eede49a09fcf6475417"
-  integrity sha512-Q9nDXSR9XWs89KuiEoA4g4wXszjo+4kNhujQq7ogG5E7kVJsONuPBE8uukjLw7nQ82l7isDJhp5GLQk5fEgB+w==
-
-"@hashiprobr/expo-use-scanner@~1.0.10":
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/@hashiprobr/expo-use-scanner/-/expo-use-scanner-1.0.10.tgz#ef4480f164f2b0a00e9519ec034d4a10ad0b5638"
-  integrity sha512-yXcW29ZVLF/hWRqyQj/18y/eAOVqGXad6qWLkGI5/hdA0HI8aysS6bWVaF8gJkGD0zzt7DNSaFGd/eM78E6MlQ==
+"@hashiprobr/expo-use-scanner@~1.0.11":
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/@hashiprobr/expo-use-scanner/-/expo-use-scanner-1.0.11.tgz#c00d285e495cb78fad801d4613721a3a5a96f1a8"
+  integrity sha512-18Jx22VzwNMZNW6Rs+rh0zwLw2dMJSaFWI5htay8mzZUReriV4nTrpQW1FPyC4Z6rXhhxKpecT9QYrJw/xIM/Q==
 
 "@hashiprobr/react-create-state-context@~1.0.5":
   version "1.0.5"
@@ -1553,6 +1548,11 @@
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@hashiprobr/react-native-rounded-view/-/react-native-rounded-view-1.0.6.tgz#14f9adbd3359fb7dbfcf1c09453799a34251d9fb"
   integrity sha512-tSYcMlrEIT5+C/JwEPhDG9pAgbd3FwCrvDxslu02RvnmbWK1tO52BydBs9uHsJsmkewygYpTLc2rgxE4fGBtvw==
+
+"@hashiprobr/react-native-use-rest@~3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@hashiprobr/react-native-use-rest/-/react-native-use-rest-3.0.0.tgz#e5a377e3c923d8625286f73b8b86933179ac9f13"
+  integrity sha512-RnQrM6E2tJDm6h/qxxFieYAQTuVnCoqA/AB+VOkfJEBX657Zi22oCIFiR127W+NHBgevCA4MLa3bfDiFQHu6+A==
 
 "@hashiprobr/react-use-emitter-and-listener@~1.0.4":
   version "1.0.4"
@@ -3888,9 +3888,9 @@ date-fns@^2.16.1:
   integrity sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==
 
 dayjs@^1.8.15:
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.1.tgz#90b33a3dda3417258d48ad2771b415def6545eb0"
-  integrity sha512-ER7EjqVAMkRRsxNCC5YqJ9d9VQYuWdGt7aiH2qA5R5wt8ZmWaP2dLUSIK6y/kVzLMlmh1Tvu5xUf4M/wdGJ5KA==
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.2.tgz#fa0f5223ef0d6724b3d8327134890cfe3d72fbe5"
+  integrity sha512-F4LXf1OeU9hrSYRPTTj/6FbO4HTjPKXvEIC1P2kcnFurViINCVk3ZV0xAS3XVx9MkMsXbbqlK6hjseaYbgKEHw==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0:
   version "2.6.9"
@@ -4220,9 +4220,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.3.564, electron-to-chromium@^1.4.118:
-  version "1.4.136"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.136.tgz#b6a3595a9c29d6d8f60e092d40ac24f997e4e7ef"
-  integrity sha512-GnITX8rHnUrIVnTxU9UlsTnSemHUA2iF+6QrRqxFbp/mf0vfuSc/goEyyQhUX3TUUCE3mv/4BNuXOtaJ4ur0eA==
+  version "1.4.137"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.137.tgz#186180a45617283f1c012284458510cd99d6787f"
+  integrity sha512-0Rcpald12O11BUogJagX3HsCN3FE83DSqWjgXoHo5a72KUKMSfI39XBgJpgNNxS9fuGzytaFjE06kZkiVFy2qA==
 
 elliptic@^6.5.3:
   version "6.5.4"

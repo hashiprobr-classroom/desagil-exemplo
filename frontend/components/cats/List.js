@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
-import { View, Image, ScrollView } from 'react-native';
+import { Image, View, ScrollView } from 'react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Text, Title, Surface, FAB, TouchableRipple, ActivityIndicator } from 'react-native-paper';
+import { TouchableRipple, Surface, Title, Text, ActivityIndicator, Button, FAB, Snackbar } from 'react-native-paper';
 
 import Icon from '@hashiprobr/react-native-paper-icon';
 
-import useRest from '@hashiprobr/expo-use-rest';
+import useRest from '@hashiprobr/react-native-use-rest';
 
 import { map } from '../../tools';
 
@@ -48,66 +48,87 @@ export default function List(props) {
     const params = route.params;
 
     const [cats, setCats] = useState();
+    const [error, setError] = useState(false);
+    const [message, setMessage] = useState('');
 
     const client = useRest(settings.url);
 
-    useEffect(async () => {
+    useEffect(() => {
         if (cats) {
             if (params) {
-                let newCats;
+                let copy;
                 switch (params.action) {
                     case 'create':
-                        newCats = [...cats, params.cat];
+                        copy = [...cats, params.cat];
                         break;
                     case 'update':
-                        newCats = [];
+                        copy = [];
                         for (const cat of cats) {
                             if (cat.key === params.cat.key) {
-                                newCats.push(params.cat);
+                                copy.push(params.cat);
                             } else {
-                                newCats.push(cat);
+                                copy.push(cat);
                             }
                         }
-                        setCats(newCats);
+                        setCats(copy);
                         break;
                     case 'delete':
-                        newCats = [];
+                        copy = [];
                         for (const cat of cats) {
                             if (cat.key !== params.key) {
-                                newCats.push(cat);
+                                copy.push(cat);
                             }
                         }
                         break;
+                    default:
+                        setMessage('Unknown action');
+                        setError(true);
                 }
-                setCats(newCats);
+                setCats(copy);
             }
         } else {
-            let body;
-            try {
-                body = await client.get('/cat/list');
-            } catch (error) {
-                console.error(error);
-            }
-            if (body) {
-                setCats(body);
-            }
+            load();
         }
     }, [params]);
 
-    function onPress() {
+    async function load() {
+        let response;
+        try {
+            response = await client.get('/cat/list');
+            setCats(response);
+        } catch (error) {
+            setMessage(error.message);
+            setError(true);
+        }
+    }
+
+    function onPressReload() {
+        load();
+    }
+
+    function onPressCreate() {
         navigation.navigate('Form');
     }
 
     return (
-        <SafeAreaView style={styles.container}>
-            {cats ? (
-                <ScrollView style={styles.scroll}>
-                    {map(cats, (cat) => <Item cat={cat} navigation={navigation} />)}
-                </ScrollView>
-            ) : (
-                <ActivityIndicator size="large" />
-            )}
-            <FAB style={styles.fab} icon="plus" onPress={onPress} />
-        </SafeAreaView >
+        <>
+            <SafeAreaView style={styles.container} edges={['top']}>
+                {cats ? (
+                    <ScrollView style={styles.outerScroll} contentContainerStyle={styles.innerScroll}>
+                        {map(cats, (cat) => <Item cat={cat} navigation={navigation} />)}
+                    </ScrollView>
+                ) : (
+                    client.running ? (
+                        <ActivityIndicator size="large" />
+                    ) : (
+                        <Button onPress={onPressReload}>Reload</Button>
+                    )
+                )}
+                <FAB style={styles.fab} icon="plus" onPress={onPressCreate} />
+            </SafeAreaView >
+            <Snackbar visible={error} action={{ label: 'Close', onPress: () => setError(false) }} onDismiss={() => { }}>
+                {message}
+            </Snackbar>
+        </>
     );
 }

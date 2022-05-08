@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Image, ScrollView } from 'react-native';
+import { ScrollView, Image } from 'react-native';
 
-import { Text, Button, TextInput, HelperText, Snackbar, Portal, Dialog, ActivityIndicator, TouchableRipple } from 'react-native-paper';
+import { TouchableRipple, ActivityIndicator, TextInput, HelperText, Button, Portal, Dialog, Text, Snackbar } from 'react-native-paper';
 
 import RoundedView from '@hashiprobr/react-native-rounded-view';
 import Icon from '@hashiprobr/react-native-paper-icon';
 import DropDown from '@hashiprobr/react-native-paper-dropdown';
 import { DateTimePicker } from '@hashiprobr/react-native-paper-datetimepicker';
 
+import useRest from '@hashiprobr/react-native-use-rest';
 import usePicker from '@hashiprobr/expo-use-picker';
-import useRest from '@hashiprobr/expo-use-rest';
 
 import settings from '../../settings.json';
 
@@ -29,7 +29,8 @@ export default function Form(props) {
         { label: 'Blue', value: 'BLUE' },
     ];
 
-    const [photo, setPhoto] = useState(params ? params.cat.photo : null);
+    const [loadedPhoto, setLoadedPhoto] = useState(null);
+    const [displayPhoto, setDisplayPhoto] = useState(params ? params.cat.photo : null);
     const [name, setName] = useState(params ? params.cat.name : '');
     const [nameError, setNameError] = useState(!validateName(name));
     const [breed, setBreed] = useState(params ? params.cat.breed : '');
@@ -37,12 +38,12 @@ export default function Form(props) {
     const [eye, setEye] = useState(params ? params.cat.eye : 'YELLOW');
     const [birth, setBirth] = useState(params ? new Date(params.cat.birth) : new Date());
     const [confirming, setConfirming] = useState(false);
-    const [clientMessage, setClientMessage] = useState('');
-    const [clientError, setClientError] = useState(false);
-
-    const picker = usePicker();
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState(false);
 
     const client = useRest(settings.url);
+
+    const picker = usePicker();
 
     useEffect(() => {
         let title;
@@ -71,10 +72,11 @@ export default function Form(props) {
     async function onPressPhoto() {
         try {
             const result = await picker.load('image/*');
-            setPhoto(result);
+            setLoadedPhoto(result);
+            setDisplayPhoto(result);
         } catch (error) {
-            setClientMessage(error.message);
-            setClientError(true);
+            setMessage(error.message);
+            setError(true);
         }
     }
 
@@ -97,39 +99,50 @@ export default function Form(props) {
     }
 
     async function onPressCreate() {
-        const cat = {
+        let cat = {
+            key: null,
             name: name,
             breed: breed,
             eye: eye,
-            photo: null,
             birth: birth.getTime(),
         };
 
         try {
-            cat.key = await client.post('/cat', cat);
+            if (loadedPhoto == null) {
+                cat.photo = null;
+                cat = await client.post('/cat', cat);
+            } else {
+                cat.photo = null;
+                cat = await client.post('/cat', cat, { photo: loadedPhoto });
+            }
             navigation.navigate('List', { action: 'create', cat: cat });
         } catch (error) {
-            setClientMessage(error.message);
-            setClientError(true);
+            setMessage(error.message);
+            setError(true);
         }
     }
 
     async function onPressUpdate() {
-        const cat = {
+        let cat = {
             key: params.cat.key,
             name: name,
             breed: breed,
             eye: eye,
-            photo: null,
             birth: birth.getTime(),
         };
 
         try {
-            await client.put('/cat', cat);
+            if (loadedPhoto == null) {
+                cat.photo = displayPhoto;
+                cat = await client.put('/cat', cat);
+            } else {
+                cat.photo = null;
+                cat = await client.put('/cat', cat, { photo: loadedPhoto });
+            }
             navigation.navigate('List', { action: 'update', cat: cat });
         } catch (error) {
-            setClientMessage(error.message);
-            setClientError(true);
+            setMessage(error.message);
+            setError(true);
         }
     }
 
@@ -144,27 +157,27 @@ export default function Form(props) {
     async function onConfirmDelete() {
         try {
             await client.delete('/cat?key=' + params.cat.key);
+            setConfirming(false);
             navigation.navigate('List', { action: 'delete', key: params.cat.key });
         } catch (error) {
-            setClientMessage(error.message);
-            setClientError(true);
+            setMessage(error.message);
+            setError(true);
         }
-        setConfirming(false);
     }
 
     return (
         <>
-            <SafeAreaView style={styles.container}>
-                <ScrollView style={styles.scroll}>
+            <SafeAreaView style={styles.container} edges={[]}>
+                <ScrollView style={styles.outerScroll} contentContainerStyle={styles.innerScroll}>
                     <TouchableRipple style={styles.photo} onPress={onPressPhoto}>
                         {picker.loading ? (
                             <ActivityIndicator style={styles.image} size="large" />
                         ) : (
-                            photo === null ? (
+                            displayPhoto === null ? (
                                 <Icon name="cat" />
                             ) : (
                                 <RoundedView style={styles.image}>
-                                    <Image style={styles.image} source={{ uri: photo }} />
+                                    <Image style={styles.image} source={{ uri: displayPhoto }} />
                                 </RoundedView>
                             )
                         )}
@@ -211,8 +224,8 @@ export default function Form(props) {
                 </ScrollView>
             </SafeAreaView>
 
-            <Snackbar visible={clientError} onDismiss={() => { }} action={{ label: 'Close', onPress: () => setClientError(false) }}>
-                {clientMessage}
+            <Snackbar visible={error} action={{ label: 'Close', onPress: () => setError(false) }} onDismiss={() => { }}>
+                {message}
             </Snackbar>
         </>
     );
