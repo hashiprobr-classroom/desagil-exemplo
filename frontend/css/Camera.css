@@ -14,6 +14,6 @@ preview {
 }
 
 image {
-    align-self: stretch;
+    width: 250px;
     margin: 25px;
 }

@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from 'react-native-paper';
 
 import AspectImage from '@hashiprobr/react-native-aspect-image';
+
 import useCamera from '@hashiprobr/expo-use-camera';
 
 import styles from '../styles/Camera.json';
@@ -26,12 +27,10 @@ export default function Camera(props) {
         let source;
         try {
             source = await camera.take();
-        } catch (error) {
-            console.error(error);
-        }
-        if (source) {
             camera.deactivate();
             setUri(source.uri);
+        } catch (error) {
+            console.error(error);
         }
     }
 

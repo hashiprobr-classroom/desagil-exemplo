@@ -21,12 +21,12 @@ export default function Scanner(props) {
         }
     }
 
-    function onPressCancel() {
+    function onBarCodeScanned(result) {
         scanner.deactivate();
+        setData(result.data);
     }
 
-    function onBarCodeScanned(result) {
-        setData(result.data);
+    function onPressCancel() {
         scanner.deactivate();
     }
 

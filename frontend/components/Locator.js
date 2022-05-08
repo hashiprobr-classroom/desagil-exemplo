@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Text, Button, ActivityIndicator } from 'react-native-paper';
+import { ActivityIndicator, Text, Button } from 'react-native-paper';
 
 import useLocator from '@hashiprobr/expo-use-locator';
 
@@ -17,10 +17,10 @@ export default function Locator(props) {
         let location;
         try {
             location = await locator.read();
+            setCoords(location.coords);
         } catch (error) {
             console.error(error);
         }
-        setCoords(location.coords);
     }
 
     return (
