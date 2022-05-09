@@ -31,6 +31,12 @@ class CatDAOTest {
 		firebase.connect();
 	}
 
+	@AfterAll
+	static void tearDownClass() {
+		firebase.disconnect();
+		firebase.remove();
+	}
+
 	@BeforeEach
 	void setUp() {
 		dao = new CatDAO();
@@ -88,11 +94,4 @@ class CatDAOTest {
 		dao.delete(key);
 		assertNull(dao.retrieve(key));
 	}
-
-	@AfterAll
-	static void tearDownClass() {
-		firebase.disconnect();
-		firebase.remove();
-	}
-
 }
