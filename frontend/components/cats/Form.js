@@ -108,7 +108,7 @@ export default function Form(props) {
         };
 
         try {
-            if (loadedPhoto == null) {
+            if (loadedPhoto === null) {
                 cat.photo = null;
                 cat = await client.post('/cat', cat);
             } else {
@@ -132,7 +132,7 @@ export default function Form(props) {
         };
 
         try {
-            if (loadedPhoto == null) {
+            if (loadedPhoto === null) {
                 cat.photo = displayPhoto;
                 cat = await client.put('/cat', cat);
             } else {
@@ -156,7 +156,7 @@ export default function Form(props) {
 
     async function onConfirmDelete() {
         try {
-            await client.delete('/cat?key=' + params.cat.key);
+            await client.delete(`/cat?key=${params.cat.key}`);
             setConfirming(false);
             navigation.navigate('List', { action: 'delete', key: params.cat.key });
         } catch (error) {

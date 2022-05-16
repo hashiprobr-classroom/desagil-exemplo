@@ -39,7 +39,7 @@ function Item(props) {
                 </View>
             </Surface>
         </TouchableRipple>
-    )
+    );
 }
 
 export default function List(props) {
