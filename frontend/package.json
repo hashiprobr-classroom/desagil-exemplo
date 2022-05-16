@@ -30,7 +30,7 @@
     "@hashiprobr/react-native-paper-dropdown": "~1.0.11",
     "@hashiprobr/react-native-paper-icon": "~1.0.4",
     "@hashiprobr/react-native-rounded-view": "~1.0.6",
-    "@hashiprobr/react-native-use-rest": "~3.0.0",
+    "@hashiprobr/react-native-use-rest": "~3.1.0",
     "@hashiprobr/react-use-emitter-and-listener": "~1.0.4",
     "@hashiprobr/react-use-loader": "~1.0.2",
     "@hashiprobr/react-use-mount-and-update": "~1.0.4",
